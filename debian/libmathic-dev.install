@@ -1,0 +1,4 @@
+usr/include/*
+usr/lib/*/libmathic.a
+usr/lib/*/libmathic.so
+usr/lib/*/pkgconfig/mathic.pc

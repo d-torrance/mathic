@@ -1,0 +1,5 @@
+mathic (1.0~git20130827-1) unstable; urgency=low
+
+  * Initial release (Closes: #780783).
+
+ -- Doug Torrance <dtorrance@monmouthcollege.edu>  Wed, 01 Apr 2015 06:27:19 -0500

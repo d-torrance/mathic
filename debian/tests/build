@@ -1,0 +1,24 @@
+#!/bin/sh
+# autopkgtest check: Build and run a program against mathic, to verify that the
+# headers and pkg-config file are installed correctly
+# Author: Doug Torrance <dtorrance@monmouthcollege.edu>
+
+set -e
+
+WORKDIR=$(mktemp -d)
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+cd $WORKDIR
+cat <<EOF > mathictest.cpp
+
+#include <mathic.h>
+int main (int argc, char *argv[])
+{
+  mathic::BitTriangle tri;
+};
+EOF
+
+g++ -o mathictest mathictest.cpp -std=c++11 `pkg-config --cflags --libs mathic`
+echo "build: OK"
+[ -x mathictest ]
+./mathictest
+echo "run: OK"

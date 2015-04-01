@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- GTEST_PATH=/usr/src
+
+override_dh_strip:
+	dh_strip --dbg-package=libmathic-dbg
+
+get-orig-source:
+	wget https://github.com/broune/mathic/archive/master.tar.gz
+	git checkout upstream
+	git pull https://github.com/broune/mathic
+	grep -Po '(?<=AC_INIT\(\[mathic\], \[).*(?=\]\))' configure.ac \
+		> version
+	git show HEAD^:configure.ac | \
+		grep -Po '(?<=AC_INIT\(\[mathic\], \[).*(?=\]\))' > oldversion
+	if test `cat oldversion` = `cat version` ; then \
+		echo "`cat version`~git`date -d @\`git log -1 --pretty=format:%ct\` +%Y%m%d`" > version; \
+	fi
+	git checkout master
+	mv -v master.tar.gz ../mathic_`cat version`.orig.tar.gz
+	rm version oldversion

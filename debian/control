@@ -1,0 +1,56 @@
+Source: mathic
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Uploaders: Doug Torrance <dtorrance@monmouthcollege.edu>
+Section: libs
+Priority: optional
+Build-Depends: debhelper (>= 9),
+               dh-autoreconf,
+               libgtest-dev,
+               libmemtailor-dev,
+               pkgconf
+Standards-Version: 3.9.6
+Vcs-Browser: http://anonscm.debian.org/cgit/debian-science/packages/mathic.git
+Vcs-Git: https://anonscm.debian.org/git/debian-science/packages/mathic.git
+Homepage: https://github.com/broune/mathic
+
+Package: libmathic-dev
+Architecture: any
+Section: libdevel
+Depends: libmathic0 (= ${binary:Version}),
+         ${misc:Depends}
+Multi-Arch: same
+Description: C++ library for Groebner basis computation (developer tools)
+ Mathic is a C++ library of fast data structures designed for use in Groebner
+ basis computation. This includes data structures for ordering S-pairs,
+ performing divisor queries and ordering polynomial terms during polynomial
+ reduction.
+ .
+ This package contains the developer tools.
+
+Package: libmathic0
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: C++ library for Groebner basis computation (runtime library)
+ Mathic is a C++ library of fast data structures designed for use in Groebner
+ basis computation. This includes data structures for ordering S-pairs,
+ performing divisor queries and ordering polynomial terms during polynomial
+ reduction.
+ .
+ This package contains the runtime library.
+
+Package: libmathic-dbg
+Architecture: any
+Section: debug
+Priority: extra
+Depends: libmathic0 (= ${binary:Version}), ${misc:Depends}
+Multi-Arch: same
+Description: C++ library for Groebner basis computation (debugging symbols)
+ Mathic is a C++ library of fast data structures designed for use in Groebner
+ basis computation. This includes data structures for ordering S-pairs,
+ performing divisor queries and ordering polynomial terms during polynomial
+ reduction.
+ .
+ This package contains the debugging symbols.

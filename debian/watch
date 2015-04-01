@@ -1,0 +1,5 @@
+# Upstream does not currently tag their releases.  However, if they do in the
+# future, something similar to the following should work.
+# version=3
+# https://github.com/broune/mathic/tags \
+# /broune/mathic/archive/mathic-(.+)\.tar\.gz
