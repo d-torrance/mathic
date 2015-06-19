@@ -1,2 +1,2 @@
 Tests: build
-Depends: libmathic-dev, build-essential, pkg-config
+Depends: build-essential, libmathic-dev, libmemtailor-dev, pkg-config
