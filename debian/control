@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 9),
                dh-autoreconf,
                libgtest-dev,
                libmemtailor-dev,
-               pkgconf
+               pkg-config
 Standards-Version: 3.9.6
 Vcs-Browser: http://anonscm.debian.org/cgit/debian-science/packages/mathic.git
 Vcs-Git: https://anonscm.debian.org/git/debian-science/packages/mathic.git
