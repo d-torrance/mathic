@@ -5,6 +5,7 @@ Section: libs
 Priority: optional
 Build-Depends: debhelper (>= 9),
                dh-autoreconf,
+               dpkg-dev (>= 1.18.0),
                libgtest-dev,
                libmemtailor-dev,
                pkg-config
@@ -16,8 +17,7 @@ Homepage: https://github.com/broune/mathic
 Package: libmathic-dev
 Architecture: any
 Section: libdevel
-Depends: libmathic0 (= ${binary:Version}),
-         ${misc:Depends}
+Depends: libmathic0 (= ${binary:Version}), ${misc:Depends}
 Multi-Arch: same
 Description: C++ library for Groebner basis computation (developer tools)
  Mathic is a C++ library of fast data structures designed for use in Groebner
@@ -29,8 +29,7 @@ Description: C++ library for Groebner basis computation (developer tools)
 
 Package: libmathic0
 Architecture: any
-Depends: ${shlibs:Depends},
-         ${misc:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: C++ library for Groebner basis computation (runtime library)
