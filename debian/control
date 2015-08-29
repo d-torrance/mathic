@@ -1,6 +1,6 @@
 Source: mathic
 Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
-Uploaders: Doug Torrance <dtorrance@monmouthcollege.edu>
+Uploaders: Doug Torrance <dtorrance@piedmont.edu>
 Section: libs
 Priority: optional
 Build-Depends: debhelper (>= 9),

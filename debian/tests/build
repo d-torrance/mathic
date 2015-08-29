@@ -1,7 +1,7 @@
 #!/bin/sh
 # autopkgtest check: Build and run a program against mathic, to verify that the
 # headers and pkg-config file are installed correctly
-# Author: Doug Torrance <dtorrance@monmouthcollege.edu>
+# Author: Doug Torrance <dtorrance@piedmont.edu>
 
 set -e
 

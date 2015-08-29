@@ -2,7 +2,7 @@ Description: Find gtest source files.
  Upstream defaults to downloading a gtest tarball and using that for build.
  Instead, we use the libgtest-dev package.  We need to tell the build system
  how to find these files.
-Author: Doug Torrance <dtorrance@monmouthcollege.edu>
+Author: Doug Torrance <dtorrance@piedmont.edu>
 Last-Update: 2015-03-19
 
 --- a/src/test/gtestInclude.cpp

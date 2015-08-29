@@ -1,6 +1,6 @@
 Description: Link against pthread.
  Avoid FTBFS due to several "undefined reference to `pthread_*' errors.
-Author: Doug Torrance <dtorrance@monmouthcollege.edu>
+Author: Doug Torrance <dtorrance@piedmont.edu>
 Last-Update: 2015-03-19
 
 --- a/Makefile.am
