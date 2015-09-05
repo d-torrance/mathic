@@ -1,3 +1,11 @@
+mathic (1.0~git20130827-3) unstable; urgency=medium
+
+  * debian/{control,libmathic0.install}
+    - Rename libmathic0 to libmathic0v5 for libstdc++ transition
+      (Closes: #797983).
+
+ -- Doug Torrance <dtorrance@piedmont.edu>  Sat, 05 Sep 2015 13:27:13 -0400
+
 mathic (1.0~git20130827-2) unstable; urgency=medium
 
   * Update my email address.
