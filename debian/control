@@ -30,6 +30,8 @@ Package: libmathic0v5
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
+Breaks: libmathic0
+Replaces: libmathic0
 Multi-Arch: same
 Description: C++ library for Groebner basis computation (runtime library)
  Mathic is a C++ library of fast data structures designed for use in Groebner
