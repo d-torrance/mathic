@@ -1,0 +1,17 @@
+Description: Fix spelling error (s/occured/occurred/).
+ Was causing a spelling-error-in-binary Lintian warning.
+Author: Doug Torrance <dtorrance@piedmont.edu>
+Forwarded: https://github.com/Macaulay2/mathic/pull/3
+Last-Update: 2016-03-20
+
+--- a/src/mathic/error.cpp
++++ b/src/mathic/error.cpp
+@@ -15,7 +15,7 @@
+ 
+     std::ostringstream err;
+     err << errorMsg << '\n'
+-        << "The internal error occured in file " << file
++        << "The internal error occurred in file " << file
+         << " on line " << lineNumber << '.';
+     reportInternalError(err.str());
+   }
