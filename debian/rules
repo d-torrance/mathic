@@ -10,9 +10,9 @@ override_dh_strip:
 	dh_strip --dbg-package=libmathic-dbg
 
 get-orig-source:
-	wget https://github.com/broune/mathic/archive/master.tar.gz
+	wget https://github.com/Macaulay2/mathic/archive/master.tar.gz
 	git checkout upstream
-	git pull https://github.com/broune/mathic
+	git pull https://github.com/Macaulay2/mathic
 	grep -Po '(?<=AC_INIT\(\[mathic\], \[).*(?=\]\))' configure.ac \
 		> version
 	git show HEAD^:configure.ac | \
