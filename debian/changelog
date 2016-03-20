@@ -1,3 +1,40 @@
+mathic (1.0~git20160320-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Now maintained by Macaulay2 developers.
+  * debian/control
+    - Bump versioned dependency on debhelper to >= 9.20160114.  Needed for
+      --dbgsym-migration option to dh_strip.
+    - Bump Standards-Version to 3.9.7.
+    - Update Homepage.
+    - Use https protocol for Vcs-Browser.
+    - Drop libmathic-dgb in favor of automatically generated
+      libmathic0v5-dbgsym package.
+  * debian/copyright
+    - Update Source.
+    - Change license to LGPL-2+. (This has actually always been the license;
+      I must have misread it when initially preparing the package.)
+  * debian/libmathic0v5.symbols
+    - Restore symbols file.
+  * debian/patches
+    - Remove previous patches; patches applied upstream.
+  * debian/patches/fix_typo.patch
+    - New patch. Fixes spelling-error-in-binary Lintian warning.
+  * debian/rules
+    - Enable all hardening flags.
+    - Update definition of GTEST_PATH for dh_auto_configure.
+    - Add --enable-shared to dh_auto_configure.
+    - Modify override_dh_strip target. Instead of building the libmathic-dbg
+      package, we use the --dbgsym-migration option to ensure proper migration
+      to the new automatically generated package.
+    - Update get-orig-source target with new location.
+  * debian/watch
+    - Update with new upstream webpage. Note that this is merely a comment;
+      upstream does not tag their releases and uscan is currently not
+      functional.
+
+ -- Doug Torrance <dtorrance@piedmont.edu>  Sun, 20 Mar 2016 16:54:38 -0400
+
 mathic (1.0~git20130827-3) unstable; urgency=medium
 
   * debian/{control,libmathic0.install}
