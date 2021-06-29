@@ -46,7 +46,7 @@ target_include_directories(mathic PUBLIC
 
 include(CTest)
 if(BUILD_TESTING)
-  add_executable(mathic-gtests
+  add_executable(mathic-unit-tests
     test/BitTriangle.cpp
     test/DivFinder.cpp
     test/HashTable.cpp
@@ -57,13 +57,14 @@ if(BUILD_TESTING)
   ################################
   # add gtest testing ############
   ################################
-  find_package(GTest)
+  if(NOT GTEST_FOUND)
+    find_package(GTest)
+  endif()
   include(GoogleTest)
-  gtest_discover_tests(mathic-gtests)
+  gtest_discover_tests(mathic-unit-tests TEST_PREFIX unit-tests:)
 
   if(GTEST_FOUND)
-    target_link_libraries(mathic-gtests mathic GTest::GTest GTest::Main)
-    target_include_directories(mathic-gtests PRIVATE ${GTEST_INCLUDE_DIR})
+    target_link_libraries(mathic-unit-tests mathic GTest::GTest GTest::Main)
   else()
     include(FetchContent)
     FetchContent_Declare(googletest
@@ -72,8 +73,8 @@ if(BUILD_TESTING)
       )
     FetchContent_MakeAvailable(googletest)
 
-    target_link_libraries(mathic-gtests mathic gtest)
-    target_include_directories(mathic-gtests PRIVATE
+    target_link_libraries(mathic-unit-tests mathic gtest)
+    target_include_directories(mathic-unit-tests PRIVATE
       ${googletest_SOURCE_DIR}/googletest/include
       ${googletest_SOURCE_DIR}/googletest/src
       ${googletest_SOURCE_DIR}/googletest
