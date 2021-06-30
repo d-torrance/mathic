@@ -35,8 +35,6 @@ add_library(mathic STATIC
   mathic/stdinc.h
   )
 
-target_compile_definitions(mathic PRIVATE MATHIC_VERSION="${MATHIC_VERSION}")
-
 target_link_libraries(mathic memtailor Threads::Threads)
 
 target_include_directories(mathic PUBLIC
