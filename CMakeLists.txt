@@ -13,9 +13,10 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(Threads 2.1 REQUIRED QUIET)
 find_package(Memtailor   REQUIRED)
 
-if(CMAKE_BUILD_TYPE STREQUAL Debug)
-  add_compile_options(-DMATHIC_DEBUG -DMEMT_DEBUG)
-endif()
+add_library(memtailor STATIC IMPORTED)
+set_target_properties(memtailor PROPERTIES
+  IMPORTED_LOCATION             "${MEMTAILOR_LIBRARIES}"
+  INTERFACE_INCLUDE_DIRECTORIES "${MEMTAILOR_INCLUDE_DIR}")
 
 add_compile_options(
   -DPACKAGE_NAME="${PROJECT_NAME}"
@@ -25,36 +26,10 @@ add_compile_options(
   -DPACKAGE_BUGREPORT=""
   -DPACKAGE_URL=""
   -DPACKAGE="${PROJECT_NAME}"
-  -DVERSION="${PROJECT_VERSION}"
   )
 
-add_library(mathic STATIC
-  src/mathic.h
-  src/mathic.cpp
-  src/mathic/Action.cpp
-  src/mathic/BitTriangle.cpp
-  src/mathic/BoolParameter.cpp
-  src/mathic/CliParameter.cpp
-  src/mathic/CliParser.cpp
-  src/mathic/ColumnPrinter.cpp
-  src/mathic/DivMask.cpp
-  src/mathic/HelpAction.cpp
-  src/mathic/IntegerParameter.cpp
-  src/mathic/StringParameter.cpp
-  src/mathic/Timer.cpp
-  src/mathic/display.cpp
-  src/mathic/error.cpp
-  src/mathic/BinaryKDTree.h
-  src/mathic/stdinc.h
-  )
+add_subdirectory(src)
 
-target_link_libraries(mathic ${MEMTAILOR_LIBRARIES} Threads::Threads)
-target_include_directories(mathic
-  PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src>
-    $<INSTALL_INTERFACE:include>
-    ${MEMTAILOR_INCLUDE_DIR}
-  )
 set_target_properties(mathic PROPERTIES PUBLIC_HEADER src/mathic.h)
 
 install(TARGETS mathic LIBRARY DESTINATION lib)
@@ -91,41 +66,4 @@ add_executable(divsim
   src/divsim/stdinc.h
   )
 target_link_libraries(divsim mathic)
-endif()
-
-include(CTest)
-if(BUILD_TESTING)
-  add_executable(mathic-gtests
-    src/test/BitTriangle.cpp
-    src/test/DivFinder.cpp
-    src/test/HashTable.cpp
-    src/test/PairQueue.cpp
-    src/test/testMain.cpp
-    )
-
-  ################################
-  # add gtest testing ############
-  ################################
-  find_package(GTest)
-  include(GoogleTest)
-  gtest_discover_tests(mathic-gtests)
-
-  if(GTEST_FOUND)
-    target_link_libraries(mathic-gtests mathic GTest::GTest GTest::Main)
-    target_include_directories(mathic-gtests PRIVATE ${GTEST_INCLUDE_DIR})
-  else()
-    include(FetchContent)
-    FetchContent_Declare(googletest
-      GIT_REPOSITORY https://github.com/google/googletest.git
-      GIT_TAG        release-1.10.0
-      )
-    FetchContent_MakeAvailable(googletest)
-
-    target_link_libraries(mathic-gtests mathic gtest)
-    target_include_directories(mathic-gtests PRIVATE
-      ${googletest_SOURCE_DIR}/googletest/include
-      ${googletest_SOURCE_DIR}/googletest/src
-      ${googletest_SOURCE_DIR}/googletest
-      )
-  endif()
 endif()
