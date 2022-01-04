@@ -65,7 +65,7 @@ namespace mathic {
 
     action->directOptions(directOptions, *this);
 
-    size_t i = 1;
+    //    size_t i = 1;
     for (size_t i = 0; i < options.size(); ++i) {
       std::string const& token = options[i];
       if (token[0] != '-')

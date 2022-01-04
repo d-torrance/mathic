@@ -26,6 +26,7 @@ add_compile_options(
   -DPACKAGE_BUGREPORT=""
   -DPACKAGE_URL=""
   -DPACKAGE="${PROJECT_NAME}"
+  -Wall -Wextra -Wno-unused-parameter
   )
 
 add_subdirectory(src)
