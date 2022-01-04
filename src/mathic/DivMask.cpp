@@ -14,5 +14,8 @@ namespace mathic {
 #else
 // The purpose of dummy is to silence a MSVC linker warning
 // that says that this file is not adding anything to the build.
-namespace {void dummy(){}}
+
+// But this gives an unused function warning on clang++, so we comment it out for now.
+// If it remains a problem on MSVC, we can ifdef for that situation.
+// namespace {void dummy(){}}
 #endif

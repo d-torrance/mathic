@@ -138,7 +138,8 @@ namespace mathic {
 
   template<class E, bool FI>
   ComTree<E, FI>::ComTree(size_t initialCapacity):
-    _array(static_cast<E*>(0) - 1),
+    _array(reinterpret_cast<E*>(-1)),
+    //_array(static_cast<E*>(0) - 1),
     _arrayKeepAlive(0),
     _lastLeaf(0),
     _capacityEnd(Node(0).next(initialCapacity))

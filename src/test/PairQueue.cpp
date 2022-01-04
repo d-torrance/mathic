@@ -188,12 +188,16 @@ TEST(PairQueue, Ordering) {
 	out << ' ' << pd;
 	pq.pop();
 	lastPd = pd;
-	// test adding a column that has already been 
-	if (p.first == 11 && p.second == 5) {
-	  Index rows[] = {0, 111};
-	  Index const* begin = rows;
-	  Index const* end = rows + sizeof(rows) / sizeof(rows[0]);
-	}
+
+    // This block of code is being commented out.
+    // The next line isn't complete.  The loop doesn't test anything.
+    
+    // // test adding a column that has already been 
+	// if (p.first == 11 && p.second == 5) {
+	//   Index rows[] = {0, 111};
+	//   Index const* begin = rows;
+	//   Index const* end = rows + sizeof(rows) / sizeof(rows[0]);
+	// }
   }
   ASSERT_EQ(" 109 1109 11109 11109 1111009 1159 13129 1339 1379 20009 2001119",
 			out.str());

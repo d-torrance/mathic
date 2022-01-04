@@ -144,9 +144,9 @@ namespace mathic {
 
   template<class C>
   HashTable<C>::HashTable(const Configuration &conf, unsigned int nbits):
-    mLogTableSize(nbits),
-    mTableSize(static_cast<size_t>(1) << nbits),
     mHashMask((static_cast<size_t>(1) << nbits) - 1),
+    mTableSize(static_cast<size_t>(1) << nbits),
+    mLogTableSize(nbits),
     mNodeCount(0),
     mBinCount(0),
     mRebuildThreshold(0.1),

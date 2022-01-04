@@ -56,7 +56,7 @@ namespace mathic {
     size_t getMemoryUse() const;
 
   private:
-	class Player;
+	struct Player;
 	// Setting fastIndex to true speeds up left/right child
 	// computations. We only compute parents, so there is no reason
 	// to enable fastIndex.

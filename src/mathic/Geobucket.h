@@ -507,7 +507,6 @@ namespace mathic {
 	const size_t newBucketSize = _bucketBegin == _bucketEnd ?
 	  _conf.minBucketSize : (_bucketEnd - 1)->capacity() * _conf.geoBase;
 	size_t required = 0;
-	typedef typename std::vector<Bucket>::iterator It;
 	for (Bucket* it = _bucketBegin; it != _bucketEnd; ++it) {
 	  required += C::bucketStorage == GeoStoreSameSizeBuffer ?
 		newBucketSize : it->capacity();
