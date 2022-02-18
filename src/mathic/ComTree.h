@@ -107,7 +107,10 @@ namespace mathic {
   private:
     ComTree& operator=(const ComTree& tree) const; // not available
 
-    Entry* _array;
+    // _array is 1-indexed into the data.  So
+    //    _array == reinterpret_cast<Entry*>(-sizeof(Entry))
+    // represents the null pointer
+    Entry* _array;  
 
     /// Macaulay 2 uses Mathic and Macaulay 2 also uses the Boehm garbage
     /// collector. Since _array points to a place before the array we
@@ -138,7 +141,7 @@ namespace mathic {
 
   template<class E, bool FI>
   ComTree<E, FI>::ComTree(size_t initialCapacity):
-    _array(reinterpret_cast<E*>(-1)),
+    _array(reinterpret_cast<E*>(-sizeof(E))), // make _array 1-indexed instead of 0-indexed.
     //_array(static_cast<E*>(0) - 1),
     _arrayKeepAlive(0),
     _lastLeaf(0),
@@ -153,7 +156,8 @@ namespace mathic {
 
   template<class E, bool FI>
   ComTree<E, FI>::ComTree(const ComTree& tree, size_t minCapacity):
-    _array(static_cast<E*>(0) - 1),
+    _array(reinterpret_cast<E*>(-sizeof(E))),
+    // _array(static_cast<E*>(0) - 1),
     _arrayKeepAlive(0),
     _lastLeaf(tree._lastLeaf)
   {
@@ -177,7 +181,7 @@ namespace mathic {
     _lastLeaf(tree._lastLeaf),
     _capacityEnd(tree._capacityEnd)
   {
-    tree._array = static_cast<E*>(0) - 1;
+    tree._array = reinterpret_cast<E*>(-sizeof(E));
     tree._arrayKeepAlive = 0;
     _lastLeaf = Node(0);
     _capacityEnd = Node(0);
@@ -295,11 +299,11 @@ namespace mathic {
     // sizeof(Entry) must be a power of two if FastIndex is true.
     MATHIC_ASSERT(!FI || (sizeof(E) & (sizeof(E) - 1)) == 0);
     if (capacity() == 0) {
-      MATHIC_ASSERT(_array == static_cast<E*>(0) - 1);
+      MATHIC_ASSERT(_array == reinterpret_cast<E*>(-sizeof(E)));
       MATHIC_ASSERT(_capacityEnd == Node(0));
       MATHIC_ASSERT(_lastLeaf == Node(0));
     } else {
-      MATHIC_ASSERT(_array != static_cast<E*>(0) - 1);
+      MATHIC_ASSERT(_array != reinterpret_cast<E*>(-sizeof(E)));
       MATHIC_ASSERT(_capacityEnd > Node(0));
       MATHIC_ASSERT(_lastLeaf <= _capacityEnd);
     }
