@@ -10,7 +10,7 @@ libmathic_la_CPPFLAGS = $(DEPS_CFLAGS)
 lib_LTLIBRARIES = libmathic.la
 
 # set the C++ compiler to include src/
-AM_CXXFLAGS=-I$(top_srcdir)/src/ -std=gnu++0x
+AM_CXXFLAGS=-I$(top_srcdir)/src/ -std=gnu++14
 
 # libraries that are needed by this library
 libmathic_la_LIBADD= $(DEPS_LIBS)
@@ -85,7 +85,7 @@ if with_gtest
 TESTS=unittest
 check_PROGRAMS=$(TESTS)
 
-unittest_CXXFLAGS = -I$(top_srcdir)/src/ -std=gnu++0x
+unittest_CXXFLAGS = -I$(top_srcdir)/src/ -std=gnu++14
 unittest_LDADD = $(top_builddir)/libmathic.la $(DEPS_LIBS) -lmemtailor -lpthread
 unittest_CPPFLAGS = $(DEPS_CFLAGS)
 
