@@ -773,11 +773,12 @@ namespace mathic {
   template<class C>
   Geobucket<C>::Bucket::Bucket
 	(size_t capacity, Entry* buffer, Entry* otherBuffer):
-  _frontPos(0),
-	_otherBuffer(otherBuffer),
-	_begin(buffer),
-	_size(0),
-	_capacity(capacity) {
+        _frontPos(0),
+        _otherBuffer(otherBuffer),
+        _back(),
+        _begin(buffer),
+        _size(0),
+        _capacity(capacity) {
 	  MATHIC_ASSERT(C::bucketStorage == GeoStoreDoubleBuffer ?
 			 otherBuffer != 0 : otherBuffer == 0);
 	}
