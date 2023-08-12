@@ -159,9 +159,14 @@ namespace mathic {
   };
 
   template<class C>
-    class DivList<C>::iterator :
-  public std::iterator<std::bidirectional_iterator_tag, Entry> {
+    class DivList<C>::iterator {
   public:
+    typedef std::bidirectional_iterator_tag iterator_category;
+    typedef Entry value_type;
+    typedef std::ptrdiff_t difference_type;
+    typedef Entry *pointer;
+    typedef Entry &reference;
+
     friend class DivList<C>;
     explicit iterator(ListIter it): _it(it) {}
     operator const_iterator() const {return const_iterator(_it);}
@@ -187,9 +192,14 @@ namespace mathic {
   };
 
   template<class C>
-    class DivList<C>::const_iterator :
-  public std::iterator<std::bidirectional_iterator_tag, const Entry> {
+    class DivList<C>::const_iterator {
   public:
+    typedef std::bidirectional_iterator_tag iterator_category;
+    typedef const Entry value_type;
+    typedef std::ptrdiff_t difference_type;
+    typedef const Entry *pointer;
+    typedef const Entry &reference;
+
     friend class DivList<C>;
     explicit const_iterator(CListIter it): _it(it) {}
     bool operator==(const_iterator it) {return _it == it._it;}
