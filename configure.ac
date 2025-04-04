@@ -12,7 +12,10 @@ dnl  contain this file then it knows that the directory is wrong.
 AC_CONFIG_SRCDIR([src/mathic.h])
 
 # Check that memtailor is installed and locate it
-# PKG_CHECK_MODULES([MEMTAILOR], [memtailor])
+AC_LANG([C++])
+AC_DEFUN([NO_MEMTAILOR_ERROR], AC_MSG_ERROR([memtailor is required]))
+AC_CHECK_HEADER([memtailor.h],, [NO_MEMTAILOR_ERROR])
+AC_SEARCH_LIBS([libmemtailorIsPresent], [memtailor],, [NO_MEMTAILOR_ERROR])
 
 AM_PROG_AR
 
@@ -45,11 +48,6 @@ AS_IF([test "x$with_gtest" != "xno"],
          [NO_GTEST_ERROR])])
 
 AM_CONDITIONAL([with_gtest], [test "x$with_gtest" != "xno"])
-
-DEPS_CFLAGS="$MEMTAILOR_CFLAGS"
-DEPS_LIBS="$MEMTAILOR_LIBS"
-AC_SUBST(DEPS_CFLAGS)
-AC_SUBST(DEPS_LIBS)
 
 # Enable optional maintainer mode (off by default)
 dnl AM_MAINTAINER_MODE turns off automatic reconstruction of the build
