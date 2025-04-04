@@ -86,11 +86,11 @@ TESTS=unittest
 check_PROGRAMS=$(TESTS)
 
 unittest_CXXFLAGS = -I$(top_srcdir)/src/ -std=gnu++14
-unittest_LDADD = $(top_builddir)/libmathic.la $(DEPS_LIBS) -lmemtailor -lpthread
+unittest_LDADD = $(top_builddir)/libmathic.la $(DEPS_LIBS) -lmemtailor -lpthread -lgtest
 unittest_CPPFLAGS = $(DEPS_CFLAGS)
 
 test_LIBS=
-unittest_SOURCES=src/test/DivFinder.cpp src/test/gtestInclude.cpp	\
+unittest_SOURCES=src/test/DivFinder.cpp \
   src/test/testMain.cpp src/test/BitTriangle.cpp					\
   src/test/PairQueue.cpp \
   src/test/HashTable.cpp
@@ -99,6 +99,6 @@ else
 
 check:
 	@echo
-	@echo "Configure did not locate gtest, so unittests cannot be run."
+	@echo "configured without gtest, so unittests cannot be run."
 
 endif
