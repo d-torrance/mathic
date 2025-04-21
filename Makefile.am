@@ -4,16 +4,12 @@ ACLOCAL_AMFLAGS = -I build/autotools/m4
 
 # Options passed to the C and C++ PreProcessor (CPP) and compiler
 AM_CPPFLAGS = -I${top_srcdir}/
-libmathic_la_CPPFLAGS = $(DEPS_CFLAGS)
 
 # tell Libtool what the name of the library is.
 lib_LTLIBRARIES = libmathic.la
 
 # set the C++ compiler to include src/
 AM_CXXFLAGS=-I$(top_srcdir)/src/ -std=gnu++14
-
-# libraries that are needed by this library
-libmathic_la_LIBADD= $(DEPS_LIBS)
 
 # the sources that are built to make libmathic.
 libmathic_la_SOURCES = src/mathic/Timer.cpp	\
@@ -61,22 +57,20 @@ EXTRA_PROGRAMS = pqsim divsim
 
 # set up the divisor query simulation. Listing the headers in sources
 # ensure that those files are included in distributions.
-divsim_CPPFLAGS = $(DEPS_CFLAGS)
 divsim_SOURCES = src/divsim/divMain.cpp src/divsim/Simulation.cpp	\
   src/divsim/DivListModel.h src/divsim/KDTreeModel.h			\
   src/divsim/Simulation.h src/divsim/divMain.h src/divsim/Monomial.h	\
   src/divsim/stdinc.h
-divsim_LDADD = $(top_builddir)/libmathic.la -lmemtailor -lpthread
+divsim_LDADD = $(top_builddir)/libmathic.la -lpthread
 
 # set up the priority queue simulation. Listing the headers in sources
 # ensure that those files are included in distributions.
-pqsim_CPPFLAGS = $(DEPS_CFLAGS)
 pqsim_SOURCES = src/pqsim/Item.cpp src/pqsim/Model.cpp			\
   src/pqsim/pqMain.cpp src/pqsim/Simulator.cpp				\
   src/pqsim/GeobucketModel.h src/pqsim/Model.h src/pqsim/stdinc.h	\
   src/pqsim/HeapModel.h src/pqsim/pqMain.h src/pqsim/StlSetModel.h	\
   src/pqsim/Item.h src/pqsim/Simulator.h src/pqsim/TourTreeModel.h
-pqsim_LDADD = $(top_builddir)/libmathic.la -lmemtailor -lpthread
+pqsim_LDADD = $(top_builddir)/libmathic.la -lpthread
 
 
 # set up tests to run on "make check"
@@ -86,11 +80,10 @@ TESTS=unittest
 check_PROGRAMS=$(TESTS)
 
 unittest_CXXFLAGS = -I$(top_srcdir)/src/ -std=gnu++14
-unittest_LDADD = $(top_builddir)/libmathic.la $(DEPS_LIBS) -lmemtailor -lpthread
-unittest_CPPFLAGS = $(DEPS_CFLAGS)
+unittest_LDADD = $(top_builddir)/libmathic.la -lpthread -lgtest
 
 test_LIBS=
-unittest_SOURCES=src/test/DivFinder.cpp src/test/gtestInclude.cpp	\
+unittest_SOURCES=src/test/DivFinder.cpp \
   src/test/testMain.cpp src/test/BitTriangle.cpp					\
   src/test/PairQueue.cpp \
   src/test/HashTable.cpp
@@ -99,6 +92,6 @@ else
 
 check:
 	@echo
-	@echo "Configure did not locate gtest, so unittests cannot be run."
+	@echo "configured without gtest, so unittests cannot be run."
 
 endif

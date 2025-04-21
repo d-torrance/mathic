@@ -12,64 +12,42 @@ dnl  contain this file then it knows that the directory is wrong.
 AC_CONFIG_SRCDIR([src/mathic.h])
 
 # Check that memtailor is installed and locate it
-# PKG_CHECK_MODULES([MEMTAILOR], [memtailor])
+AC_LANG([C++])
+AC_DEFUN([NO_MEMTAILOR_ERROR], AC_MSG_ERROR([memtailor is required]))
+AC_CHECK_HEADER([memtailor.h],, [NO_MEMTAILOR_ERROR])
+AC_SEARCH_LIBS([libmemtailorIsPresent], [memtailor],, [NO_MEMTAILOR_ERROR])
 
 AM_PROG_AR
 
 dnl ----- The gtest dependency
 
-AC_ARG_WITH([gtest], AS_HELP_STRING(
-    [--with-gtest], [use gtest, which is required for running the unit tests
-      with make check. The value download, which is the default, downloads
-      gtest if a gtest source directory cannot be found. Per the recommendation
-      of the gtest documentation, gtest is compiled with the tests, so an
-      installed gtest is not usable - you need the gtest source. GTEST_PATH
-      indicates where to look for gtest and it is also where gtest
-      will be downloaded to if not found. The default path is srcdir/libs so
-      that gtest needs to be at srcdir/libs/gtest/ where srcdir is the
-      base of the directory being configured from.]
-))
+AC_ARG_WITH([gtest],
+    [AS_HELP_STRING([--with-gtest],
+        [use gtest, which is required for running the unit tests
+         with make check [default=yes].])],,
+    [with_gtest=yes])
 
-AC_MSG_CHECKING([for gtest])
-AS_IF([test "$GTEST_PATH" = ""], [GTEST_PATH="$srcdir/libs"])
-AS_IF([test "$GTEST_VERSION" = ""], [GTEST_VERSION="1.6.0"])
-AS_IF([test "$with_gtest" = ""], [with_gtest="download"])
+AC_DEFUN([NO_GTEST_ERROR],
+    [AC_MSG_ERROR([gtest not found; try again using --without-gtest])])
 
-AS_IF([test "$with_gtest" = "download"],
-  [with_gtest="yes"; AS_IF([test -e "$GTEST_PATH/src/gtest-all.cc"], [], [
-    mkdir -p "$GTEST_PATH";
-    (
-      cd $GTEST_PATH;
-      rm -rf gtest-$GTEST_VERSION.zip
-      wget http://googletest.googlecode.com/files/gtest-$GTEST_VERSION.zip;
-      unzip gtest-$GTEST_VERSION.zip;
-      rm gtest-$GTEST_VERSION.zip
-      rm -rf gtest/
-      mv gtest-$GTEST_VERSION/ gtest/
-    );
-    if test ! -e "$GTEST_PATH/src/gtest-all.cc"; then
-      AC_MSG_WARN([Failed to download or extract gtest.]);
-      with_gtest="no";
-    else
-      with_gtest="yes";
-    fi
-  ])],
-  [test "$with_gtest" = "yes"], [
-    AS_IF([test -e "$GTEST_PATH/src/gtest-all.cc"], [], [
-      AC_MSG_ERROR([could not find gtest source at path $GTEST_PATH.])
-    ])
-  ],
-  [test "$with_gtest" = "no"], [],
-  [AC_MSG_ERROR([invalid value $with_gtest for with_gtest.])]
-)
-AS_IF([test "$with_gtest" = "yes"],
-  [CPPFLAGS="-I$GTEST_PATH/include -I$GTEST_PATH $CPPFLAGS"]);
-AM_CONDITIONAL(with_gtest, test "$with_gtest" = "yes")
+AS_IF([test "x$with_gtest" != "xno"],
+     [AC_LANG([C++])
+      AC_CHECK_HEADER([gtest/gtest.h],
+         [AC_MSG_CHECKING([for library containing testing::InitGoogleTest])
+          SAVELIBS=$LIBS
+          LIBS="$LIBS -lgtest"
+          AC_LINK_IFELSE(
+              [AC_LANG_PROGRAM([
+                  #include <gtest/gtest.h>
+                  ], [
+                  testing::InitGoogleTest()])],
+              [AC_MSG_RESULT([-lgtest])],
+              [AC_MSG_RESULT([no])
+               NO_GTEST_ERROR])
+          LIBS=$SAVELIBS],
+         [NO_GTEST_ERROR])])
 
-DEPS_CFLAGS="$MEMTAILOR_CFLAGS $GTEST_CFLAGS"
-DEPS_LIBS="$MEMTAILOR_LIBS $GTEST_LIBS"
-AC_SUBST(DEPS_CFLAGS)
-AC_SUBST(DEPS_LIBS)
+AM_CONDITIONAL([with_gtest], [test "x$with_gtest" != "xno"])
 
 # Enable optional maintainer mode (off by default)
 dnl AM_MAINTAINER_MODE turns off automatic reconstruction of the build
