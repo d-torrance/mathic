@@ -396,8 +396,7 @@ TEST(PairQueue, ConDeconOfPairData) {
 }
 
 TEST(PairQueue, RetirementSetToTrue) {
-  // This test gives an undesigned symbol in the linker now
-  // ASSERT_TRUE(mathic::PairQueue<PQConDeconCounterConf>::SupportRetirement);
+  ASSERT_TRUE(mathic::PairQueue<PQConDeconCounterConf>::SupportRetirement);
   mathic::PairQueue<PQConDeconCounterConf> pq((PQConDeconCounterConf()));
   pq.configuration().owningQueue = &pq;
   mathic::PairQueue<PQConf>::Index* null = 0;
