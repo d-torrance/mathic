@@ -1,6 +1,10 @@
 #ifndef MATHIC_STDINC_GUARD
 #define MATHIC_STDINC_GUARD
 
+#if __cplusplus < 201703L
+#error "mathic requires C++17 or later"
+#endif
+
 #ifdef _MSC_VER // For Microsoft Compiler in Visual Studio C++.
 // Sometimes you know that a function will be called very rarely so you want to
 // tell the compiler not to inline it even if it could be inlined at only a
