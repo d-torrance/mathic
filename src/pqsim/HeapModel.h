@@ -6,7 +6,7 @@
 
 template<bool FastIndex>
 struct HeapModelBase {
-  static const bool fastIndex = FastIndex;
+  static constexpr bool fastIndex = FastIndex;
 };
 
 template<bool OnSpans, bool Deduplicate, bool FastIndex>

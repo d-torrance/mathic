@@ -70,11 +70,11 @@ class KDTreeModelConfiguration {
   double getRebuildRatio() const {return _rebuildRatio;}
   size_t getRebuildMin() const {return _minRebuild;}
 
-  static const bool UseDivMask = UDM;
-  static const bool UseTreeDivMask = UTDM;
-  static const bool PackedTree = PT;
-  static const size_t LeafSize = LS;
-  static const bool AllowRemovals = AR;
+  static constexpr bool UseDivMask = UDM;
+  static constexpr bool UseTreeDivMask = UTDM;
+  static constexpr bool PackedTree = PT;
+  static constexpr size_t LeafSize = LS;
+  static constexpr bool AllowRemovals = AR;
 
   unsigned long long getExpQueryCount() const {return _expQueryCount;}
 

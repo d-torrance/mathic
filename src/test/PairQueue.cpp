@@ -40,7 +40,7 @@ namespace mathic {
   namespace PairQueueNamespace {
 	template<>
 	struct SupportRetirement<PQConf> {
-	  static bool const value = false;
+	  static constexpr bool value = false;
 	};
   }
 }
@@ -329,7 +329,7 @@ namespace mathic {
 
 	template<>
 	struct SupportRetirement<PQConDeconCounterConf> {
-	  static bool const value = true;
+	  static constexpr bool value = true;
 	};
   }
 }

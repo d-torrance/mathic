@@ -96,7 +96,7 @@ private:
     std::vector<Entry>& getPending() {return _pending;}
     size_t getComparisons() const {return _comparisons;}
 
-    static const bool supportDeduplication = Deduplicate;
+    static constexpr bool supportDeduplication = Deduplicate;
 
   private:
     mutable size_t _comparisons;

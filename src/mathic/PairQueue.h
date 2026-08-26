@@ -131,8 +131,7 @@ namespace mathic {
 	// configuration.
 	template<class Configuration>
 	struct SupportRetirement {
-	  // the value field must be static bool const.
-	  static bool const value = true;
+	  static constexpr bool value = true;
 	};
   }
 
@@ -198,7 +197,7 @@ namespace mathic {
 	typedef C Configuration;
 	typedef typename C::PairData PairData;
 	typedef PairQueueNamespace::Index Index;
-	static bool const SupportRetirement =
+	static constexpr bool SupportRetirement =
 	  PairQueueNamespace::SupportRetirement<Configuration>::value;
 
 	// PairQueue stores a copy of the passed in configuration.
@@ -365,7 +364,7 @@ namespace mathic {
 		return mConf.cmpLessThan(cr);
 	  }
 
-      static const bool fastIndex = false;
+      static constexpr bool fastIndex = false;
 
 	private:
 	  Configuration& mConf;

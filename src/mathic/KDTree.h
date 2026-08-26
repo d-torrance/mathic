@@ -68,7 +68,7 @@ namespace mathic {
         _divisorCache = 0;
     }
 
-    static const bool UseDivMask = C::UseDivMask;
+    static constexpr bool UseDivMask = C::UseDivMask;
     typedef typename C::Monomial Monomial;
     typedef typename C::Entry Entry;
     typedef typename C::Exponent Exponent;

@@ -38,9 +38,10 @@
   Returns the number of variables. Variables are indexed from 0 to
   getVarCount() - 1. Must be a positive number.
 
- * static const bool UseDivMask
+ * static constexpr bool UseDivMask
   Set to true to use div masks to speed up queries. This must be a
-  static const data member.
+  compile-time constant data member (static constexpr bool, or static
+  const bool with a constant initializer).
 
  * size_t getUseAutomaticRebuild() const
  * double getRebuildRatio() const

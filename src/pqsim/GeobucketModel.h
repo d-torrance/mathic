@@ -18,13 +18,13 @@ public:
   size_t geoBase;
   size_t minBucketSize;
 
-  static const bool trackFront = TrackFront;
-  static const bool minBucketBinarySearch = MinBucketBinarySearch;
-  static const bool premerge = Premerge;
-  static const bool collectMax = CollectMax;
-  static const mathic::GeobucketBucketStorage bucketStorage =
+  static constexpr bool trackFront = TrackFront;
+  static constexpr bool minBucketBinarySearch = MinBucketBinarySearch;
+  static constexpr bool premerge = Premerge;
+  static constexpr bool collectMax = CollectMax;
+  static constexpr mathic::GeobucketBucketStorage bucketStorage =
     (mathic::GeobucketBucketStorage)BucketStorage;
-  static const size_t insertFactor = InsertFactor;
+  static constexpr size_t insertFactor = InsertFactor;
 };
 
 template<
