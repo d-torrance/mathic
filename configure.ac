@@ -70,6 +70,8 @@ dnl source and binary interface of the library and is not the same as the
 dnl version of the project.
 AC_SUBST([MATHIC_SO_VERSION], [0:4:0])
 
+AX_CXX_COMPILE_STDCXX([17],,[mandatory])
+
 dnl ----- The gtest dependency
 
 AC_ARG_WITH([gtest],
@@ -83,7 +85,6 @@ AC_DEFUN([NO_GTEST_ERROR],
 
 AS_IF([test "x$with_gtest" != "xno"],
      [AC_LANG([C++])
-      AX_CXX_COMPILE_STDCXX([17],,[mandatory])
       AC_CHECK_HEADER([gtest/gtest.h],
          [AC_MSG_CHECKING([for library containing testing::InitGoogleTest])
           SAVELIBS=$LIBS
