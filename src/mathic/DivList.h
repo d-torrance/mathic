@@ -53,8 +53,8 @@ namespace mathic {
     typedef typename C::Monomial Monomial;
     typedef typename C::Exponent Exponent;
 
-    static const bool UseLinkedList = C::UseLinkedList;
-    static const bool UseDivMask = C::UseDivMask;
+    static constexpr bool UseLinkedList = C::UseLinkedList;
+    static constexpr bool UseDivMask = C::UseDivMask;
 
   private:
     typedef typename DivMask::Extender<Entry, C::UseDivMask> ExtEntry;

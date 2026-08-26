@@ -29,8 +29,8 @@ public:
   _minRebuild(minRebuild),
   _expQueryCount(0) {}
 
-  static const bool UseLinkedList = ULL;
-  static const bool UseDivMask = UDM;
+  static constexpr bool UseLinkedList = ULL;
+  static constexpr bool UseDivMask = UDM;
 
   bool getDoAutomaticRebuilds() const {return _useAutomaticRebuild;}
   double getRebuildRatio() const {return _rebuildRatio;}

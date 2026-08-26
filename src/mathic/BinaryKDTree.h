@@ -46,7 +46,7 @@ namespace mathic {
     typedef KDTreeInterior Interior;
     typedef KDTreeLeaf Leaf;
     typedef C Configuration;
-    static const bool UseDivMask = C::UseDivMask;
+    static constexpr bool UseDivMask = C::UseDivMask;
 
     class KDTreeNode {
     public:

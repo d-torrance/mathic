@@ -30,7 +30,7 @@ namespace mathic {
 
     private:
     typedef C Configuration;
-    static const bool UseDivMask = C::UseDivMask;
+    static constexpr bool UseDivMask = C::UseDivMask;
 
     class Node {
     public:

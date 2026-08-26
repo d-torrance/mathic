@@ -88,8 +88,8 @@ namespace mathic {
 
       //private:
       friend class ComTree<Entry, FastIndex>;
-      static const bool fi = FastIndex;
-      static const size_t S = sizeof(Entry);
+      static constexpr bool fi = FastIndex;
+      static constexpr size_t S = sizeof(Entry);
       explicit Node(size_t i): _index(i) {}
       size_t getNormalIndex() const {return fi ? _index / S : _index;}
       size_t _index;
